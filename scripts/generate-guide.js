@@ -17,8 +17,9 @@ const path = require('path');
 const CONFIG = {
   apiHost: process.env.MINIMAX_API_HOST || 'https://api.minimax.io',
   apiKey: process.env.MINIMAX_API_KEY,
-  outputDir: path.join(__dirname, '../content/guias'),
+  outputDir: path.join(__dirname, '../src/content/guias'),
   templateFile: path.join(__dirname, '../templates/guide-template.html'),
+  contentDir: path.join(__dirname, '../src/content/guias'),
   languages: ['es', 'en', 'pt', 'fr', 'de'],
   
   // HIGH CPC CATEGORIES - nuestro enfoque principal

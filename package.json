@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npx serve . -l 3000",
     "build": "echo 'Static site - no build needed'",
+    "generate-content": "npm run batch",
     
     "generate": "node scripts/generate-guide.js",
     "generate:es": "node scripts/generate-guide.js",

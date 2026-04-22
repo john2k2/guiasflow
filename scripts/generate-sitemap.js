@@ -11,7 +11,7 @@ const CONFIG = {
   languages: ['es', 'en', 'pt', 'fr', 'de'],
   categories: ['finanzas', 'tecnologia', 'salud', 'cocina', 'educacion', 'hogar'],
   outputFile: path.join(__dirname, '../src/sitemap.xml'),
-  contentDir: path.join(__dirname, '../content/guias')
+  contentDir: path.join(__dirname, '../src/content/guias')
 };
 
 function getAllGuides() {
