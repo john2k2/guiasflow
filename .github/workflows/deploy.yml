@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Content
+        run: npm run generate-content
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+
+      - name: Update Sitemap
+        run: npm run sitemap
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./src
+          publish_branch: gh-pages
+
+  weekly-audit:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    cron: '0 2 * * 0'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run SEO Audit
+        run: |
+          curl -sL https://squirrelscan.com/install.sh | sh
+          squirrel audit ${{ vars.SITE_URL }} --format llm --output audit-report.md
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-audit-report
+          path: audit-report.md

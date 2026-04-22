@@ -1,0 +1,7 @@
+{
+  "name": "Sitemap Generator",
+  "description": "Generates sitemap.xml for all guides in multiple languages",
+  "scripts": {
+    "generate": "node scripts/generate-sitemap.js"
+  }
+}

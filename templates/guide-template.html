@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="{LANG}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{TITLE}</title>
+  <meta name="description" content="{META_DESCRIPTION}">
+  <link rel="canonical" href="{CANONICAL_URL}">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{TITLE}">
+  <meta property="og:description" content="{META_DESCRIPTION}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{CANONICAL_URL}">
+  <meta property="article:published_time" content="{PUBLISHED_DATE}">
+  <meta property="article:modified_time" content="{MODIFIED_DATE}">
+  <meta property="article:section" content="{CATEGORY}">
+  
+  <!-- Multi-language alternate links -->
+  <link rel="alternate" hreflang="es" href="{BASE_URL}/es/guides/{SLUG}/">
+  <link rel="alternate" hreflang="en" href="{BASE_URL}/en/guides/{SLUG}/">
+  <link rel="alternate" hreflang="pt" href="{BASE_URL}/pt/guides/{SLUG}/">
+  <link rel="alternate" hreflang="fr" href="{BASE_URL}/fr/guides/{SLUG}/">
+  <link rel="alternate" hreflang="de" href="{BASE_URL}/de/guides/{SLUG}/">
+  <link rel="alternate" hreflang="x-default" href="{BASE_URL}/es/guides/{SLUG}/">
+  
+  <!-- Schema.org HowTo Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "{TITLE}",
+    "description": "{META_DESCRIPTION}",
+    "image": "{HERO_IMAGE}",
+    "author": {
+      "@type": "Organization",
+      "name": "GuíasFlow"
+    },
+    "datePublished": "{PUBLISHED_DATE}",
+    "dateModified": "{MODIFIED_DATE}",
+    "step": [
+      {STEPS_JSON}
+    ],
+    "totalTime": "PT{TOTAL_TIME}",
+    "supply": [{SUPPLIES}],
+    "tool": [{TOOLS}]
+  }
+  </script>
+  
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "GuíasFlow",
+        "item": "{BASE_URL}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{CATEGORY_NAME}",
+        "item": "{BASE_URL}/{LANG}/category/{CATEGORY_SLUG}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{TITLE}",
+        "item": "{CANONICAL_URL}"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {FAQ_JSON}
+    ]
+  }
+  </script>
+  
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --bg-card-hover: #22222e;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --accent: #ff6b35;
+      --accent-glow: rgba(255, 107, 53, 0.15);
+      --accent-secondary: #4ecdc4;
+      --gradient-1: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+      --gradient-hero: linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #1a1a24 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    ::selection { background: var(--accent); color: var(--bg-primary); }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .lang-switcher { display: flex; gap: 0.5rem; align-items: center; }
+    .lang-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+    .lang-btn:hover, .lang-btn.active { 
+      background: var(--accent); 
+      color: var(--bg-primary);
+      border-color: var(--accent);
+    }
+
+    .article-header {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      background: var(--gradient-hero);
+      position: relative;
+    }
+
+    .article-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .article-category {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.15);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      color: var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+    .article-meta svg { width: 16px; height: 16px; }
+
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .article-intro {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+
+    .article-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .article-body h3 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .article-body strong { color: var(--text-primary); font-weight: 600; }
+
+    .step-block {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-left: 4px solid var(--accent);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-block h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .tip-box {
+      background: rgba(78, 205, 196, 0.1);
+      border: 1px solid rgba(78, 205, 196, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .tip-box::before {
+      content: '💡 ';
+      font-size: 1.2rem;
+    }
+
+    .warning-box {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .warning-box::before {
+      content: '⚠️ ';
+      font-size: 1.2rem;
+    }
+
+    .faq-section {
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .faq-item p { color: var(--text-secondary); margin: 0; }
+
+    .related-guides {
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .related-guides h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .related-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .related-card h3 { font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .related-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+    /* AdSense In-Article */
+    .ads-container {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin: 3rem 0;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      padding: 4rem 2rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-brand p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+
+    .footer-links h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; color: var(--text-muted); }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.75rem; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+      .article-meta { gap: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-content { grid-template-columns: 1fr; }
+      .lang-switcher { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{BASE_URL}/{LANG}/" class="logo">GuíasFlow</a>
+    <ul class="nav-links">
+      <li><a href="/{LANG}/category/{CATEGORY_SLUG}/">{CATEGORY_NAME}</a></li>
+      <li><a href="/{LANG}/guides/">Todas las Guías</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <a href="/es/guides/{SLUG}/" class="lang-btn" title="Español">ES</a>
+      <a href="/en/guides/{SLUG}/" class="lang-btn" title="English">EN</a>
+      <a href="/pt/guides/{SLUG}/" class="lang-btn" title="Português">PT</a>
+      <a href="/fr/guides/{SLUG}/" class="lang-btn" title="Français">FR</a>
+      <a href="/de/guides/{SLUG}/" class="lang-btn" title="Deutsch">DE</a>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <span class="article-category">{CATEGORY_NAME}</span>
+    <h1>{TITLE}</h1>
+    <div class="article-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        {PUBLISHED_DATE_FORMATTED}
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        {READ_TIME} min lectura
+      </span>
+      <span>
+        👁 {VIEWS} vistas
+      </span>
+    </div>
+  </header>
+
+  <article class="article-content">
+    <p class="article-intro">{INTRO}</p>
+    
+    <!-- Google AdSense In-Article -->
+    <div class="ads-container">
+      <div>Anuncio</div>
+      <small>Contenido seleccionado por Google</small>
+    </div>
+
+    <div class="article-body">
+      {CONTENT}
+    </div>
+
+    <!-- Google AdSense In-Article -->
+    <div class="ads-container">
+      <div>Anuncio</div>
+      <small>Contenido seleccionado por Google</small>
+    </div>
+
+    <section class="faq-section">
+      <h2>Preguntas Frecuentes</h2>
+      <div class="faq-list">
+        {FAQ_CONTENT}
+      </div>
+    </section>
+
+    <section class="related-guides">
+      <h2>Guías Relacionadas</h2>
+      <div class="related-grid">
+        {RELATED_GUIDES}
+      </div>
+    </section>
+  </article>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>GuíasFlow</h3>
+        <p>Tu recurso favorito para aprender cómo hacer cualquier cosa.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Categorías</h4>
+        <ul>
+          <li><a href="/{LANG}/category/finanzas/">Finanzas</a></li>
+          <li><a href="/{LANG}/category/tecnologia/">Tecnología</a></li>
+          <li><a href="/{LANG}/category/salud/">Salud</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Popular</h4>
+        <ul>
+          <li><a href="/{LANG}/guides/como-invertir-fondos-indexados/">Cómo invertir</a></li>
+          <li><a href="/{LANG}/guides/como-ahorrar-dinero/">Ahorrar dinero</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="/{LANG}/about/">Sobre nosotros</a></li>
+          <li><a href="/{LANG}/privacy/">Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 GuíasFlow. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</body>
+</html>

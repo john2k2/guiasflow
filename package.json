@@ -1,0 +1,20 @@
+{
+  "name": "guiasflow",
+  "version": "1.0.0",
+  "description": "Multi-language how-to guides site for AdSense monetization",
+  "scripts": {
+    "dev": "npx serve src -l 3000",
+    "build": "echo 'Static site - no build needed'",
+    "generate-guide": "node scripts/generate-guide.js",
+    "research-trends": "node scripts/research-trends.js",
+    "audit": "squirrel audit http://localhost:3000 --format llm",
+    "deploy": "npx gh-pages -d src"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
