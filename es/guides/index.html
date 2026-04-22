@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todas las Guías - GuíasFlow</title>
+  <meta name="description" content="Explora todas nuestras guías paso a paso. Encuentra la guía perfecta para lo que necesitas aprender.">
+  
+  <link rel="canonical" href="https://guiasflow.github.io/es/guides/">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --accent: #ff6b35;
+      --gradient-1: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .lang-switcher { display: flex; gap: 0.5rem; }
+    .lang-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+    .lang-btn:hover, .lang-btn.active { 
+      background: var(--accent); 
+      color: var(--bg-primary);
+      border-color: var(--accent);
+    }
+
+    .page-header {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%);
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p { color: var(--text-secondary); font-size: 1.2rem; }
+
+    .filters {
+      padding: 2rem;
+      background: var(--bg-secondary);
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg-primary);
+      border-color: var(--accent);
+    }
+
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .guide-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .guide-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 107, 53, 0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .guide-image {
+      height: 160px;
+      background: var(--gradient-1);
+    }
+
+    .guide-content { padding: 1.5rem; }
+    .guide-content h3 { font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary); }
+    .guide-content p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+
+    .guide-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .category-tag {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.15);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer p { color: var(--text-muted); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .guides-grid { grid-template-columns: 1fr; }
+      .filters { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">GuíasFlow</a>
+    <div class="lang-switcher">
+      <a href="/es/guides/" class="lang-btn active">ES</a>
+      <a href="/en/guides/" class="lang-btn">EN</a>
+      <a href="/pt/guides/" class="lang-btn">PT</a>
+      <a href="/fr/guides/" class="lang-btn">FR</a>
+      <a href="/de/guides/" class="lang-btn">DE</a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1>Todas las Guías</h1>
+    <p>Explora nuestra colección completa de guías paso a paso</p>
+  </header>
+
+  <section class="filters">
+    <button class="filter-btn active" data-filter="all">Todas</button>
+    <button class="filter-btn" data-filter="finanzas">💰 Finanzas</button>
+    <button class="filter-btn" data-filter="tecnologia">💻 Tecnología</button>
+    <button class="filter-btn" data-filter="salud">🏋️ Salud</button>
+    <button class="filter-btn" data-filter="cocina">🍳 Cocina</button>
+    <button class="filter-btn" data-filter="educacion">🎓 Educación</button>
+    <button class="filter-btn" data-filter="hogar">🔧 Hogar</button>
+  </section>
+
+  <section class="guides-grid" id="guides-container">
+    <!-- Dynamic content -->
+  </section>
+
+  <footer>
+    <p>© 2025 GuíasFlow. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const guides = [
+      { title: 'Cómo Invertir en Fondos Indexados desde Cero', excerpt: 'Guía completa para principiantes que quieren hacer crecer su dinero.', category: 'finanzas', readTime: '12 min', views: '340K', slug: 'como-invertir-en-fondos-indexados' },
+      { title: 'Cómo Hacer Pollo a la Plancha Perfecto', excerpt: 'La técnica que los restaurantes no quieren que sepas.', category: 'cocina', readTime: '8 min', views: '280K', slug: 'como-hacer-pollo-plancha-perfecto' },
+      { title: 'Cómo Armar tu Primera PC Gaming', excerpt: 'Todos los componentes explicados y guía de compra.', category: 'tecnologia', readTime: '20 min', views: '520K', slug: 'como-armar-pc-gaming' },
+      { title: 'Cómo Mejorar tu Concentración para Estudiar', excerpt: 'Técnicas respaldadas por neuroscience.', category: 'educacion', readTime: '15 min', views: '890K', slug: 'como-mejorar-concentracion-estudiar' },
+      { title: 'Cómo Ahorrar Dinero en 2025', excerpt: 'Estrategias probadas para ahorrar aunque ganes poco.', category: 'finanzas', readTime: '14 min', views: '450K', slug: 'como-ahorrar-dinero-2025' },
+      { title: 'Cómo Hacer Ejercicio en Casa sin Equipamiento', excerpt: 'Rutina completa de 30 minutos sin nada.', category: 'salud', readTime: '10 min', views: '620K', slug: 'como-hacer-ejercicio-casa' }
+    ];
+
+    const container = document.getElementById('guides-container');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    function renderGuides(filter = 'all') {
+      container.innerHTML = '';
+      const filtered = filter === 'all' ? guides : guides.filter(g => g.category === filter);
+      
+      filtered.forEach((guide, i) => {
+        const card = document.createElement('a');
+        card.href = `/es/guides/${guide.slug}/`;
+        card.className = 'guide-card';
+        card.innerHTML = `
+          <div class="guide-image" style="background: hsl(${(i * 47) % 360}, 70%, 50%)"></div>
+          <div class="guide-content">
+            <span class="category-tag">${guide.category}</span>
+            <h3>${guide.title}</h3>
+            <p>${guide.excerpt}</p>
+            <div class="guide-meta">
+              <span>📖 ${guide.readTime}</span>
+              <span>👁 ${guide.views}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGuides(btn.dataset.filter);
+      });
+    });
+
+    renderGuides();
+  </script>
+</body>
+</html>
