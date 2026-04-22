@@ -1,175 +1,301 @@
-# GuíasFlow - Multi-language How-To Guides for AdSense Monetization
+# GuíasFlow
 
-![GuíasFlow](https://img.shields.io/badge/Gu%C3%ADasFlow-v1.0-orange)
-![Languages](https://img.shields.io/badge/Languages-5-green)
-![License](https://img.shields.io/badge/License-MIT-blue)
+> Plataforma premium de guías paso a paso multilingüe para monetización con Google AdSense.
 
-Plataforma automatizada de guías paso a paso en 5 idiomas, optimizada para generar tráfico y monetizar con Google AdSense.
+![Version](https://img.shields.io/badge/version-2.0.0-orange)
+![Languages](https://img.shields.io/badge/languages-5-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## 🎯 Características
+## 🎯 Proyecto
 
-- **5 Idiomas**: Español, Inglés, Portugués, Francés, Alemán
-- **Alto CPC Categories**: Finanzas, Tecnología, Salud, Legal, Educación
-- **100% Automatizado**: Research, generación de contenido, traducción y publicación
-- **SEO Optimizado**: Schema markup (HowTo, FAQ, Article), meta tags, sitemap
-- **AI SEO**: Optimizado para Google AI Overviews, ChatGPT, Perplexity
-- **AdSense Ready**: Estructura optimizada para maximizar RPM
+Sistema automatizado de generación de contenido que crea guías **perfectas** para ranking SEO y monetización AdSense.
 
-## 🚀 Inicio Rápido
+### Características Principales
 
-### 1. Configurar API Key de MiniMax
+- ✅ **Calidad sobre cantidad** - 2-3 guías/semana optimizadas al máximo
+- ✅ **Multi-idioma** - ES, EN, PT, FR, DE
+- ✅ **100% Validado** - Sin errores, contenido completo
+- ✅ **SEO Premimum** - Schema markup, meta tags, estructura optimizada
+- ✅ **Alto CPC** - Categorías de máximo valor (Finanzas, Salud, Legal)
+- ✅ **Social Ready** - Posts pre-generados para X/Instagram
+
+## 🚀 Quick Start
+
+### 1. Configurar API Key
 
 ```bash
 export MINIMAX_API_KEY="tu-api-key-aqui"
 ```
 
-### 2. Generar una guía
+Obtener key en: [platform.minimax.io](https://platform.minimax.io)
+
+### 2. Generar Primera Guía
 
 ```bash
-cd guiasflow
-npm install
-node scripts/generate-guide.js "Cómo invertir en fondos indexados" finanzas es
+# Solo español
+npm run generate -- "Cómo invertir en fondos indexados" finanzas es
+
+# Con research automático (tarda más)
+npm run research -- es
+
+# Batch premium (2-3 guías optimizadas)
+npm run batch
 ```
 
-### 3. Investigación de tendencias
+### 3. Ver en GitHub Pages
 
 ```bash
-node scripts/research-trends.js es
+https://john2k2.github.io/guiasflow/
 ```
 
 ## 📁 Estructura del Proyecto
 
 ```
 guiasflow/
-├── src/                    # Contenido estático (generado)
-│   ├── es/                 # Versión español
-│   ├── en/                 # Versión inglés
-│   ├── pt/                 # Versión portugués
-│   ├── fr/                 # Versión francés
-│   ├── de/                 # Versión alemán
-│   ├── index.html          # Página principal
-│   ├── sitemap.xml         # Sitemap XML
-│   └── robots.txt          # Configuración robots
 ├── content/
-│   └── guias/              # Guías generadas por idioma/categoría
-├── templates/
-│   └── guide-template.html # Template para guías
+│   └── guias/
+│       ├── es/
+│       │   ├── finanzas/
+│       │   │   ├── como-invertir-...html
+│       │   │   ├── como-invertir-...social.json
+│       │   │   └── como-invertir-...meta.json
+│       │   ├── salud/
+│       │   └── tecnologia/
+│       ├── en/, pt/, fr/, de/...
 ├── scripts/
-│   ├── generate-guide.js   # Generador de guías
-│   ├── research-trends.js # Investigador de tendencias
-│   └── generate-sitemap.js # Generador de sitemap
-├── config/
-│   └── .env.example       # Variables de entorno
-└── .github/workflows/
-    └── deploy.yml          # GitHub Actions para deploy
+│   ├── generate-guide.js      # ⭐ Generador premium
+│   ├── batch-premium.js       # Batch de 2-3 guías
+│   ├── research-trends.js      # Research de tendencias
+│   ├── validate-content.js     # Validador de contenido
+│   ├── social-media.js         # Social media manager
+│   └── generate-sitemap.js     # Generador de sitemap
+├── templates/
+│   └── guide-template.html    # Template con Schema markup
+├── scheduled/                   # Posts para redes (pending)
+└── reports/                    # Reportes de validación
 ```
 
-## ⚙️ API de MiniMax
+## 📋 Scripts Disponibles
 
-Este proyecto utiliza la API de MiniMax para:
-
-- **Generación de contenido** (MiniMax M2.7)
-- **Búsquedas web** (web_search MCP)
-- **Generación de imágenes** (futuro)
-
-### Obtener API Key
-
-1. Visitar [MiniMax Platform](https://platform.minimax.io)
-2. Ir a User Center > API Keys
-3. Crear nueva key
-
-## 📊 Categorías de Alto CPC
-
-| Categoría | CPC Estimado | Idiomas |
-|-----------|------------|---------|
-| 💰 Finanzas Personales | $15-50 | ES, EN, PT |
-| 🏥 Salud & Fitness | $12-35 | ES, EN, FR |
-| ⚖️ Legal/Derecho | $15-40 | ES, EN |
-| 💻 Tecnología | $10-30 | ES, EN |
-| 🎓 Educación | $8-20 | TODOS |
-
-## 🔄 Pipeline de Automatización
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    AUTOMATION FLOW                       │
-├─────────────────────────────────────────────────────────┤
-│                                                          │
-│  1. RESEARCH (semanal)                                   │
-│     └→ node scripts/research-trends.js es                │
-│     └→ Identifica topics trending                        │
-│     └→ Calcula priority score                            │
-│                                                          │
-│  2. GENERATE (2-3 guías/semana)                          │
-│     └→ node scripts/generate-guide.js [topic] [cat] [lang]│
-│     └→ MiniMax M2.7 genera contenido                    │
-│     └→ Auto-traduce a 5 idiomas                         │
-│     └→ Genera schema markup SEO                         │
-│                                                          │
-│  3. PUBLISH (automático)                                 │
-│     └→ GitHub Actions trigger                            │
-│     └→ Deploy a GitHub Pages                             │
-│     └→ Update sitemap                                    │
-│                                                          │
-│  4. MONITOR (semanal)                                    │
-│     └→ Squirrel audit                                    │
-│     └→ Score tracking                                    │
-│     └→ AI citation monitoring                           │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
-```
-
-## 🎨 Monetización AdSense
-
-El sitio está optimizado para AdSense con:
-
-- **3 espacios de anuncios por guía**: Header, in-article (2x), footer
-- **Altos CPC**: Categorías Finance, Health, Legal
-- **Contenido evergreen**: Temas que siempre buscan люди
-- **Mobile-first**: Optimizado para tráfico móvil
-- **Core Web Vitals**: Velocidad optimizada
-
-## 🔒 Configuración SEO/AI
-
-El archivo `robots.txt` está configurado para:
-
-- ✅ Permitir todos los bots de IA para citación
-- ✅ Permitir Googlebot, Bingbot
-- ✅ Bloquear bots de scraping (Ahrefs, Semrush)
-- ✅ Auto-discovery via sitemap
-
-## 📦 Scripts Disponibles
+### Generación de Contenido
 
 ```bash
 # Generar una guía
-npm run generate-guide -- "Cómo invertir" finanzas es
+npm run generate -- "título del topic" categoría idioma
 
-# Investigar tendencias
-npm run research-trends -- es 10
+# Research de tendencias
+npm run research -- es 10
 
-# Generar sitemap
-npm run sitemap
+# Batch premium (2-3 guías optimizadas)
+npm run batch
+```
 
+### Validación
+
+```bash
+# Validar todo el contenido
+npm run validate
+
+# Validar una guía específica
+npm run validate -- single path/to/guide.html
+```
+
+### Social Media
+
+```bash
+# Ver estado de cuentas y guías listas
+npm run social:status
+
+# Generar posts programados
+npm run social:generate
+
+# Demo de generación
+npm run social:demo
+```
+
+### Deployment
+
+```bash
 # Deploy a GitHub Pages
 npm run deploy
 
-# Audit SEO
-npm run audit
+# Generar sitemap
+npm run sitemap
 ```
 
-## 🎯 Roadmap
+## 📊 Pipeline de Generación Premium
 
-- [ ] Integrar generación de imágenes con MiniMax
-- [ ] Auto-generar contenido en burst (batch de 10 guías)
-- [ ] Dashboard de métricas en /analytics
-- [ ] Sistema de comentarios
-- [ ] Newsletter integration
-- [ ] Multi-domain support
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    PREMIUM GENERATION PIPELINE              │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  1. RESEARCH (AI-powered)                                    │
+│     └→ Búsqueda de intención real del usuario              │
+│     └→ Identificación de content gaps                       │
+│     └→ Datos específicos y estadísticas                      │
+│     └→ Estructura óptima                                    │
+│                                                              │
+│  2. GENERATION (MiniMax M2.7)                              │
+│     └→ Title SEO-optimized con keyword al inicio            │
+│     └→ Meta description 155 caracteres                      │
+│     └→ 1200-3000 palabras de contenido real                 │
+│     └→ 5-15 steps detalhados (100+ palabras cada uno)      │
+│     └→ 4+ FAQs con objeciones reales                        │
+│                                                              │
+│  3. VALIDATION (automatic)                                  │
+│     └→ Word count check                                     │
+│     └→ Steps/FAQs count check                              │
+│     └→ Schema markup validation                              │
+│     └→ SEO score calculation (target: 85+)                 │
+│                                                              │
+│  4. SOCIAL SNIPPETS                                        │
+│     └→ Twitter/X post                                      │
+│     └→ LinkedIn post                                        │
+│     └→ Instagram caption + hashtags                         │
+│     └→ Scheduled for optimal posting times                  │
+│                                                              │
+│  5. SAVE & OUTPUT                                          │
+│     └→ HTML file                                           │
+│     └→ Social snippets JSON                                 │
+│     └→ Metadata JSON (SEO score, wordcount, etc)          │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## 🎓 Categorías Alto CPC
+
+| Categoría | CPC | Idiomas | Prioridad |
+|-----------|-----|---------|-----------|
+| 💰 Finanzas Personales | $15-50 | ES, EN, PT | 🔴 Alta |
+| 🏥 Salud & Fitness | $12-35 | ES, EN, FR | 🔴 Alta |
+| ⚖️ Legal/Asesoría | $15-40 | ES, EN | 🟡 Media |
+| 💻 Tecnología | $10-30 | ES, EN | 🟡 Media |
+| 🎓 Educación | $8-20 | TODOS | 🟢 Media |
+
+## 🌐 Multi-idioma
+
+El sistema genera contenido en 5 idiomas:
+
+| Código | Idioma | Mercado |
+|--------|--------|---------|
+| `es` | Español | Latinoamérica + España |
+| `en` | English | US, UK, CA, AU |
+| `pt` | Português | Brasil + Portugal |
+| `fr` | Français | Francia + África francófona |
+| `de` | Deutsch | Alemania + Austria |
+
+## 📱 Social Media (Próximamente)
+
+### Estado Actual
+
+| Plataforma | Estado | Cuenta |
+|------------|--------|--------|
+| X (Twitter) | ⏳ Pendiente | @guiasflow |
+| Instagram | ⏳ Pendiente | @guiasflow |
+
+El sistema ya genera los snippets optimizados para cada plataforma. Una vez creadas las cuentas y configuradas las API keys, se activará el posting automático.
+
+### Para Activar
+
+1. Crear cuenta X: **@guiasflow**
+2. Crear cuenta Instagram: **@guiasflow**
+3. Obtener API keys de [X Dev Portal](https://developer.twitter.com)
+4. Configurar en `.env`:
+
+```bash
+X_API_KEY=tu_key
+X_API_SECRET=tu_secret
+X_ACCESS_TOKEN=tu_token
+X_ACCESS_SECRET=tu_access_secret
+IG_USERNAME=guiasflow
+IG_PASSWORD=tu_password
+```
+
+## 🔒 SEO & Schema Markup
+
+Cada guía incluye:
+
+- ✅ **HowTo Schema** - Para rich snippets en Google
+- ✅ **FAQPage Schema** - Preguntas frecuentes en SERP
+- ✅ **Article Schema** - Datos del artículo
+- ✅ **Breadcrumb Schema** - Navegación estructurada
+- ✅ **Open Graph** - Para social sharing
+- ✅ **Twitter Cards** - Preview en Twitter
+
+## 📊 Monetización AdSense
+
+### Optimizaciones Implementadas
+
+- Espacios de anuncios: Header + 2 in-article + Footer
+- Categorías de alto CPC para maximizar RPM
+- Contenido evergreen (tráfico constante)
+- Mobile-first responsive design
+- Core Web Vitals optimizados
+- Sin JavaScript blocking (CSS inline)
+- Estructura clara para crawler de Google
+
+### Requisitos AdSense
+
+- [x] Dominio propio (en proceso: GitHub Pages)
+- [x] Contenido sustancial (+50 páginas)
+- [x] Políticas de privacidad
+- [x] Términos y condiciones
+- [ ] Aprobar cuenta AdSense
+
+## 🔄 Workflow de Contenido Semanal
+
+```
+LUNES          → Research de tendencias (research-trends.js)
+MARTES         → Generar 1 guía premium (batch-premium.js)
+MIÉRCOLES      → Validar contenido (validate-content.js)
+JUEVES         → Generar 1 guía premium
+VIERNES        → Revisar guías, generar social snippets
+SÁBADO/DOMINGO → Descanso / Planning semanal
+```
+
+## 📦 Agregar Nuevo Topic
+
+Edita `BATCH_CONFIG.topicIdeas` en `scripts/batch-premium.js`:
+
+```javascript
+topicIdeas: {
+  finanzas: [
+    'Cómo invertir en fondos indexados paso a paso',
+    'Tu nuevo topic aquí'
+  ],
+  // ... otras categorías
+}
+```
+
+## 🛠️ Desarrollo
+
+### Requisitos
+
+- Node.js 18+
+- npm
+- MiniMax API Key
+
+### Instalación
+
+```bash
+git clone https://github.com/john2k2/guiasflow.git
+cd guiasflow
+npm install
+export MINIMAX_API_KEY="tu-key"
+```
+
+### Test Local
+
+```bash
+npm run dev
+# Abre http://localhost:3000
+```
 
 ## 📄 Licencia
 
-MIT - Ver LICENSE para más detalles.
+MIT - Libre para usar y modificar.
 
 ---
 
-Hecho con ❤️ para la comunidad de creadores de contenido.
+**GuíasFlow** - Generando contenido de calidad desde 2025.

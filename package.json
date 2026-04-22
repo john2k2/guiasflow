@@ -1,14 +1,31 @@
 {
   "name": "guiasflow",
-  "version": "1.0.0",
-  "description": "Multi-language how-to guides site for AdSense monetization",
+  "version": "2.0.0",
+  "description": "Premium multi-language how-to guides platform for AdSense monetization",
   "scripts": {
-    "dev": "npx serve src -l 3000",
+    "dev": "npx serve . -l 3000",
     "build": "echo 'Static site - no build needed'",
-    "generate-guide": "node scripts/generate-guide.js",
-    "research-trends": "node scripts/research-trends.js",
-    "audit": "squirrel audit http://localhost:3000 --format llm",
-    "deploy": "npx gh-pages -d src"
+    
+    "generate": "node scripts/generate-guide.js",
+    "generate:es": "node scripts/generate-guide.js",
+    "generate:en": "node scripts/generate-guide.js",
+    
+    "research": "node scripts/research-trends.js",
+    
+    "batch": "node scripts/batch-premium.js",
+    "batch:all": "MINIMAX_API_KEY=$MINIMAX_API_KEY node scripts/batch-premium.js",
+    
+    "social:status": "node scripts/social-media.js status",
+    "social:generate": "node scripts/social-media.js generate",
+    "social:demo": "node scripts/social-media.js demo",
+    
+    "sitemap": "node scripts/generate-sitemap.js",
+    
+    "validate": "node scripts/validate-content.js",
+    "validate:all": "node scripts/validate-content.js all",
+    
+    "deploy": "git add . && git commit -m 'Content update' && git push origin main",
+    "audit": "echo 'Run squirrel audit separately: squirrel audit https://john2k2.github.io/guiasflow/ --format llm'"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -16,5 +33,15 @@
   "dependencies": {},
   "devDependencies": {
     "serve": "^14.2.0"
-  }
+  },
+  "keywords": [
+    "seo",
+    "content-generation",
+    "adsense",
+    "multilingual",
+    "guides",
+    "how-to"
+  ],
+  "author": "GuíasFlow",
+  "license": "MIT"
 }
